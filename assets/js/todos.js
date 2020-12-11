@@ -1,3 +1,10 @@
+$(document).ready(function(){
+    if(localStorage.getItem("data") === null ) {
+        var data = ['Go to Yoga Class', 'Bye'];
+        localStorage.setItem("data", JSON.stringify(data));
+    }
+  });
+
 $("ul").on("click","li",function(){
     $(this).toggleClass("completed");
 });
@@ -14,6 +21,11 @@ $("input[type='text'").keypress(function(event){
         var todoText = $(this).val();
         $(this).val("");
         $("ul").append("<li><span><i class='fa fa-trash'></i></span> " + todoText + "</li>");
+        var prevData = JSON.parse(localStorage.getItem("data"));
+        console.log("prevData");
+        console.log(prevData);
+        prevData.push(todoText);
+        localStorage.setItem("data", prevData);
     }
 });
 
